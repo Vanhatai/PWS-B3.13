@@ -37,13 +37,10 @@ class Tag:
             ending = f"</{self.tag}>"
             return opening + "\n" + internal + "\n" + ending
         
-        if not attrs:
-            attrs = "\b"    # удалить лишний пробел после названия тега, если атрибутов нет
-        
         if self.is_single:
-            return f"<{self.tag} {attrs}/>"
+            return f'<{self.tag}{" " + attrs if attrs else ""}/>'
         else:
-            return f"<{self.tag} {attrs}>{self.text}</{self.tag}>"
+            return f'<{self.tag}{" " + attrs if attrs else ""}>{self.text}</{self.tag}>'
 
     def __add__(self, other):
         self.children.append(other)
